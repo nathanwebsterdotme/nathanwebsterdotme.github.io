@@ -1,5 +1,5 @@
 ---
-title:  "Automating Consul Server on AWS - Part 1"
+title:  "Automating Consul in AWS | Part 1 | Automating Consul Server Deployments"
 date:   2017-02-20 15:00:00
 categories: [consul, aws]
 tags: [consul, ansible, aws, asg, devops]
@@ -80,7 +80,7 @@ A basic configuration file with the options we need to launch a cluster might lo
     "enable_syslog": true,
     "leave_on_terminate": true,
     "bind_addr": "EC2_USER_DATA_BIND_ADDR",
- 	"retry_join_ec2": {
+ 	  "retry_join_ec2": {
       "region": "eu-west-1",
   	  "tag_key": "service",
       "tag_value": "consul-server"
