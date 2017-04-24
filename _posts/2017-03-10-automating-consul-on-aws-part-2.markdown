@@ -4,6 +4,7 @@ date:   2017-03-15 12:00:00
 categories: [consul, aws]
 tags: [consul, security, aws, devops]
 ---
+
 In Part 2 of this Automating Consul in AWS series, we're going to focus on securing our Cluster.  We'll look at some of the Consul features that can help us secure our cluster like gossip encryption, TLS authentication and disabling remote exec.  I planned to incorporate ACL rules here too, but as Consul 0.8 has just been released, with improved ACL coverage, we'll cover that in a seperate post.
 
 
