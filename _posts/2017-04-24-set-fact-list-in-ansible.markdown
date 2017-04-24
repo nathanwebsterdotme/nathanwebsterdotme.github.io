@@ -12,7 +12,7 @@ Problem: I want to use the ```set_fact``` module to create a list in Ansible.  I
 Solution:
 The following code did the job!
 
-```
+```yaml
 - name: Look up AWS ASG by name
   ec2_asg_facts:
     region: "{{ region }}"
@@ -21,6 +21,5 @@ The following code did the job!
 
 - name: Create list of instance_ids
   set_fact:
-    ec2_asg_instance_ids: "{{ ec2_asg_facts_results.results[0].instances | map(attribute='instance_id') | list }}"
-
+{% raw %}    ec2_asg_instance_ids: "{{ ec2_asg_facts_results.results[0].instances | map(attribute='instance_id') | list }}"{% endraw %}
 ```
