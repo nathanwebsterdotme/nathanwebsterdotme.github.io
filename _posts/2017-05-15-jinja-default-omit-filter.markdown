@@ -39,17 +39,17 @@ If I didn't use the filter, I'd have to introduce a boolean variable called "iam
 tasks:
 - name: Launch an EC2 instance without IAM role
   ec2:
-    name: "{{ ec2_vars.name }}"
-    image: "{{ ec2_vars.ami }}"
-    group: "{{ ec2_vars.security_group }}"
+    name: "\{\{ ec2_vars.name \}\}"
+    image: "\{\{ ec2_vars.ami \}\}"
+    group: "\{\{ ec2_vars.security_group \}\}"
   when: ec2_vars.iam_role == false
 
 - name: Launch an EC2 instance with an IAM role
   ec2:
-    name: "{{ ec2_vars.name }}"
-    image: "{{ ec2_vars.ami }}"
-    group: "{{ ec2_vars.security_group }}"
-    instance_profile_name: "{{ ec2_vars.iam_role.name }}"
+    name: "\{\{ ec2_vars.name \}\}"
+    image: "\{\{ ec2_vars.ami \}\}"
+    group: "\{\{ ec2_vars.security_group \}\}"
+    instance_profile_name: "\{\{ ec2_vars.iam_role.name \}\}"
   when: ec2_vars.iam_role == true
 
 ```
@@ -70,10 +70,10 @@ However, with our ```default(omit)``` filter, our role would look like this:
 tasks:
 - name: Launch an EC2 instance with an IAM role
   ec2:
-    name: "{{ ec2_vars.name }}"
-    image: "{{ ec2_vars.ami }}"
-    group: "{{ ec2_vars.security_group }}"
-    instance_profile_name: "{{ ec2_vars.iam_role.name | default (omit) }}"
+    name: "\{\{ ec2_vars.name \}\}"
+    image: "\{\{ ec2_vars.ami \}\}"
+    group: "\{\{ ec2_vars.security_group \}\}"
+    instance_profile_name: "\{\{ ec2_vars.iam_role.name | default (omit) \}\}"
 
 ```
 
