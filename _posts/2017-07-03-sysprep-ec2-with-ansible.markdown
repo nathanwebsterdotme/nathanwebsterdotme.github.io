@@ -44,7 +44,7 @@ So now I have my Sysprep action running, this will take a few minutes and will s
   - name: Query AWS API and wait until instance is in 'stopped' state
     ec2_remote_facts:
       filters:
-        instance-id: "{{ ec2_instance_id }}"
+        instance-id: 'i-1234567890'
     register: reg_ec2_remote_facts
     until: reg_ec2_remote_facts.instances[0].state == "stopped"
     retries: 20
