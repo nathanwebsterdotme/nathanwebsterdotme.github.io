@@ -1,8 +1,8 @@
 ---
 title:  "Custom Ansible Module Failing With Syntax Error"
-date:   2018-04-04 12:48:00
-categories: [ansible]
-tags: [ansible, python]
+date:   2018-04-04 19:30:00
+categories: [devops]
+tags: [ansible, modules]
 ---
 
 Today has been spent debugging an issue that is quite hard to diagnose and easy to overlook.  One of those that makes no sense whatsoever, with awful error messages that don't help at all.

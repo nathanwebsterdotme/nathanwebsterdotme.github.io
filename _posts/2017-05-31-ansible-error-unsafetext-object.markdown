@@ -1,8 +1,8 @@
 ---
 title:  "Ansible fails with ansible.vars.unsafe_proxy.AnsibleUnsafeText object"
 date:   2017-05-31 18:01:00
-categories: [ansible]
-tags: [ansible, devops]
+categories: [devops]
+tags: [ansible, windows, iis]
 ---
 
 Sometimes, we all have those days where you aare convinced your code is completely right and despite checking it over and over, you just can't decipher what's wrong with it.  Today was one of those days.
@@ -57,5 +57,3 @@ This was the fix:
 ```
 
 Hopefully this might help someone else save some time and their head from banging against the table!
-
-

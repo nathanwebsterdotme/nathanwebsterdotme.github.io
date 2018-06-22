@@ -1,8 +1,8 @@
 ---
 title:  "Testing WinRM Connections"
 date:   2017-02-02 11:30:00
-categories: [ansible, molecule, windows]
-tags: [ansible, molecule, windows, winrm, devops]
+categories: [devops]
+tags: [ansible, molecule, windows, winrm]
 ---
 
 I've been playing around with [Molecule](https://github.com/metacloud/molecule) which is a great system for unit testing Ansible Roles.

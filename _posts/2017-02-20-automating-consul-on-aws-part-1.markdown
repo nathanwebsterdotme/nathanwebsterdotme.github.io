@@ -1,8 +1,8 @@
 ---
 title:  "Automating Consul in AWS | Part 1 | Automating Consul Server Deployments"
 date:   2017-02-20 15:00:00
-categories: [consul, aws]
-tags: [consul, ansible, aws, asg, devops]
+categories: [cloud, devops]
+tags: [consul, ansible, aws, asg]
 ---
 
 In this blog post, we'll cover some of the key parts of launching scalable Consul Clusters using AWS Auto Scaling Groups.  In part 2 of this series, we'll look at securing the cluster, backups and using Consul in Production.

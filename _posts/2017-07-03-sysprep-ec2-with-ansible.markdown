@@ -1,7 +1,7 @@
 ---
 title:  "Sysprep Windows 2016 EC2 with Ansible"
 date:   2017-07-03 18:30:00
-categories: [ansible]
+categories: [devops]
 tags: [ansible, windows, ec2]
 ---
 

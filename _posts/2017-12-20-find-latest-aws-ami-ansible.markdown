@@ -1,7 +1,7 @@
 ---
 title:  "Find the latest AWS AMI with Ansible"
 date:   2017-12-20 18:30:00
-categories: [ansible]
+categories: [devops]
 tags: [ansible, windows, ec2]
 ---
 

@@ -1,8 +1,8 @@
 ---
 title:  "Jinja default (omit) filter for Ansible"
 date:   2017-05-15 15:35:00
-categories: [ansible]
-tags: [jinja, ansible, devops]
+categories: [devops]
+tags: [jinja, ansible, aws]
 ---
 
 I love the ```default (omit)``` jinja filter in Ansible.

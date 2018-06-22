@@ -1,8 +1,8 @@
 ---
 title:  "Set Fact as list in Ansible"
 date:   2017-04-24 12:50:00
-categories: [ansible]
-tags: [ansible, devops]
+categories: [devops, cloud]
+tags: [ansible, devops, ec2]
 ---
 
 I've just been battling with this one in Ansible so thought I'd post up the solution.
