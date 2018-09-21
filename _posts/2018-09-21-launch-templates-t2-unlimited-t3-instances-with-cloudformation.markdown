@@ -1,6 +1,6 @@
 ---
 title:  "Launch Templates, T2 Unlimited and T3 Instances with CloudFormation"
-date:   2018-09-21 13:37:00
+date:   2018-09-21 14:37:00
 categories: [devops]
 tags: [cloudformation, ec2]
 ---
