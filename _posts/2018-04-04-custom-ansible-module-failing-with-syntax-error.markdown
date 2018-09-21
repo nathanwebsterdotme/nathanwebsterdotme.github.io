@@ -10,7 +10,7 @@ Today has been spent debugging an issue that is quite hard to diagnose and easy 
 I have been testing some work which included a change to a custom Ansible module.  I knew that the custom module worked prior to this change so was able to rule out functionality problems pretty quickly.  The change to the custom module had changed it's name (for good reasons).  In this example, the change had renamed the Ansible module to **"custom-ansible-module"**
 
 When testing the work (along with a bunch of other changes), I started to see an error similar to the following when we ran the playbook task that called the custom module:
-```
+```bash
 fatal: [1.2.3.4 -> localhost]: FAILED! => {"changed": false, "module_stderr": "  File \"/home/local/nathanwebster/.ansible/tmp/ansible-tmp-1522766648.4-230460146388392/custom-ansible-module\", line 99\n    from ansible_module_custom-ansible-module import main\n                             ^\nSyntaxError: invalid syntax\n", "module_stdout": "", "msg": "MODULE FAILURE", "rc": 0}
 ```
 

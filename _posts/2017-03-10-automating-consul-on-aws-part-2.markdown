@@ -14,7 +14,7 @@ We want to ensure that gossip communication between our servers and agents is se
 
 #### [Gossip Encryption](https://www.consul.io/docs/agent/encryption.html)
 Gossip encryption is easily enabled.  First, generate a gossip encryption key using ```consul keygen``` then add the following to your server and agent config file:
-```
+```json
 {
   "encrypt": "encryptionkey"
 }
@@ -25,7 +25,7 @@ As we said before, TLS is used to secure the RPC calls between agents.  We can e
 As per the Consul website, there is a tutorial on how to create certificates [here](http://russellsimpkins.blogspot.com/2015/10/consul-adding-tls-using-self-signed.html)
 
 Once we have the certificates on our server, we can enable the use of them in our config file as follows:
-```
+```json
 {
   "ca_file": "path/to/ca.cert",
   "cert_file": "path/to/consul.cert",
@@ -34,7 +34,7 @@ Once we have the certificates on our server, we can enable the use of them in ou
 ```
 By providing the certificates, TLS will be automatically enabled but we need to specify when we want to use it.
 
-```
+```json
 {
   "verify_incoming": true,
   "verify_outgoing": true
@@ -49,7 +49,7 @@ More information on Encryption can be found on the Consul website [here](https:/
 ### [Consul Exec](https://www.consul.io/docs/commands/exec.html)
 Consul provides an built-in mechanism for remote execution called "exec".  With the right ACL permissions, it's possible to run remote commands on any number of nodes joined to the cluster.  For me, that's a massive attack vector and needs to be disabled.  Fortunately, this is easy to do via the server config.  Just add the following line to the ```0-consul.json``` file from Part 1.  (note - this is disabled by default in v0.8 and above)
 
-```
+```json
 {
     "disable_remote_exec": true
 }

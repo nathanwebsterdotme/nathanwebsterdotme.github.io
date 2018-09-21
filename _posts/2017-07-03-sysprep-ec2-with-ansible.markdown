@@ -17,7 +17,7 @@ By using Asynchronous task execution in Ansible, I can basically 'fire and forge
 
 I decided to do a 'fire and forget' async task by setting the 'poll' value to 0 as follows.  Note, this is the correct task for Windows Server 2016 on AWS EC2.
 
-```
+```yaml
 ---
 - name: Schedule EC2Launch to run on next boot
   win_shell: 'C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\SysprepInstance.ps1'
@@ -27,7 +27,7 @@ I decided to do a 'fire and forget' async task by setting the 'poll' value to 0 
 
 So now I have my Sysprep action running, this will take a few minutes and will shut the instance down gracefully.  Before I move on to the AMI creation task though, I want to ensure this has completed succesfully so I added the following task on the Ansible localhost:
 
-```
+```yaml
 - name: Run the sysprep command on the target
   hosts: ec2_instance
 

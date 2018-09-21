@@ -8,7 +8,7 @@ tags: [ansible, windows, iis]
 Sometimes, we all have those days where you aare convinced your code is completely right and despite checking it over and over, you just can't decipher what's wrong with it.  Today was one of those days.
 
 One of my ansible tasks was failing with this error message:
-```
+```bash
 TASK [win_iis_webapppool : Create / Delete Win IIS App Pool] *******************
 task path: /path/to/ansible/roles/win_iis_webapppool/tasks/main.yml:3
 fatal: [win-iis-webapppool]: FAILED! => {
@@ -21,7 +21,7 @@ This is a role I'm working on to Create / Delete one or more IIS App Pools on a 
 
 This is the role:
 
-```
+```yaml
 ---
 - name: Create / Delete Win IIS App Pool
   win_iis_webapppool:
@@ -33,7 +33,7 @@ This is the role:
 
 I configured the role with a variable tree similar to:
 
-```
+```yaml
 win_iis_app_pools:
 - name: 'win-iis-webapppool-test'
   state: 'started'
@@ -46,7 +46,7 @@ The issue is with the ```with_items: win_iis_app_pools``` line in the task.  As 
 
 This was the fix:
 
-```
+```yaml
 ---
 - name: Create / Delete Win IIS App Pool
   win_iis_webapppool:

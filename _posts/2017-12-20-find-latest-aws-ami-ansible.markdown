@@ -15,7 +15,7 @@ To fix this, I wrote a quick role to go to find the latest version of the AMI an
 
 The role looks like this:
 
-```
+```yaml
 ---
 - name: Find latest AWS EC2 AMI by name
   ec2_ami_find:

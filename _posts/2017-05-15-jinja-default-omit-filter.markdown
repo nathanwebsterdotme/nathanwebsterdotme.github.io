@@ -11,7 +11,7 @@ I'm currently writing a lot of roles in the Ansible code I'm currently working o
 
 Let's take the 'ec2' ansible module for example.  I'm using a simplified set of arguments here, but let's assume that the following is true:
 
-```
+```yaml
 # Mandatory Arguments:
 ec2_vars:
   name:  test123
@@ -26,7 +26,7 @@ ec2_vars:
 
 If I didn't use the filter, I'd have to introduce a boolean variable called "iam_role" and write a role similar to:
 
-```
+```yaml
 ### Sample Vars ###
 # vars:
 #   ec2_vars:
@@ -58,7 +58,7 @@ I've seen roles written like this.  Obviously, this isn't good as we're duplicat
 
 However, with our ```default(omit)``` filter, our role would look like this:
 
-```
+```yaml
 ### Sample Vars ###
 # vars:
 #   ec2_vars:

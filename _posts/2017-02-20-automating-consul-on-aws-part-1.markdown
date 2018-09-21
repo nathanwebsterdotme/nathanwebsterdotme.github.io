@@ -34,7 +34,7 @@ Let's first look at the AWS resources we'll need to launch our cluster.
 Our Consul Server nodes will need to query the AWS EC2 API to discover other Consul server nodes that it can join to create a cluster.  AWS recommends using IAM Roles to give permissions to EC2 instances.
 To allow Consul to discover other Consul nodes, we need to allow the ec2:DescribeInstances permissions.  An example IAM Policy that would allow this is:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -70,7 +70,7 @@ Once we have our server with Consun installed, there are a few configuration cha
 Consul configuration files are processed in alphabetical order.  Let's create a consul config file here (assuming our install path is /opt/consul) `/opt/consul/consul.d/0-consul.json`
 A basic configuration file with the options we need to launch a cluster might look like this:
 
-```
+```json
 {
     "bootstrap-expect": 3,
     "server": true,
@@ -96,7 +96,7 @@ There are a number of options available to us, [documented here](https://www.con
 
 [leave_on_terminate](https://www.consul.io/docs/agent/options.html#leave_on_terminate) sends a 'leave' message to the Consul cluster when it recieves a TERM signal, ensuring nodes leave the cluster gracefully.  This is useful for us when scaling down the number of nodes we have via AWS Auto Scaling Groups.
 
-```
+```json
 {
   "leave_on_terminate": true
 }
@@ -108,7 +108,7 @@ There are a number of options available to us, [documented here](https://www.con
 The [bootstrap_expect](https://www.consul.io/docs/agent/options.html#bootstrap_expect) option allows us to specify the number of server nodes to wait for on launch before trying to create a cluster.  This helps us to prevent split-brain scenarios as we will avoid having a number of nodes launch and create clusters of 1 node.  In this example, we'll set this to 3, which is the number of nodes we'll launch in our Auto Scaling Group.
 As each node launches, it will wait for 2 others to be joined before trying to create a cluster and elect a leader.  This is ideal when our three new nodes might take slightly different amounts of time to launch.
 
-```
+```json
 {
   "bootstrap_expect": 3
 }
@@ -119,7 +119,7 @@ As each node launches, it will wait for 2 others to be joined before trying to c
 The [bind_addr](https://www.consul.io/docs/agent/options.html#bind_addr) option allows us to explicitally specify which IP address of the server that Consul should use.  I like to do this to prevent any problems with Consul binding to other IP addresses or failing to launch if it can't decide which one to use.
 As we are going to launch a number of instances from the same AWS AMI, we can't set this value before we launch the instance, so we have to template this variable and change this after we launch our live AWS EC2 instance.  We can do this easily with EC2 User Data (more on this later).  For now, let's set this variable to something we can target easily later, such as "EC2_USER_DATA_BIND_ADDR".
 
-```
+```json
 {
   "bind_addr": "EC2_USER_DATA_BIND_ADDR"
 }
@@ -131,25 +131,27 @@ As we are going to launch a number of instances from the same AWS AMI, we can't 
 In version 0.7.1 of Consul, Hashicorp introduced the `retry_join_ec2` configuration option.  This allows us to configure Consul to automatically discover other EC2 nodes via Tags, rather than having to provide a list of IP addresses.  Again, this is ideal when launching a set of nodes in an Auto Scaling Group, as they will all discover each other as long as our tags are consistent.
 Here, we tell the Consul server to look for other instances with the tag key:value pair of `"service": "consul-server"` in the eu-west-1 region.  The Consul instance will query the AWS API every 30 seconds until it successfully discovers and joins another instance running Consul Server. s
 
-```
+```json
 {
   "retry_join_ec2": {
-  "region": "eu-west-1",
-  "tag_key": "service",
-  "tag_value": "consul-server"
-},
+    "region": "eu-west-1",
+    "tag_key": "service",
+    "tag_value": "consul-server"
+  }
+}
 ```
 
 As we created an IAM Role earlier to enable the correct permissions for EC2 discovery, we don't need to specify our AWS keys here as our EC2 instance will have intrinsic permissions to do so.  If you did want to hard-code your AWS api keys instead of using IAM roles (not recommended) then you can do so like this:
 
-```
+```json
 {
   "retry_join_ec2": {
-  "region": "eu-west-1",
-  "tag_key": "service",
-  "tag_value": "consul-server",
-  "access_key_id": "12345",
-  "secret_access_key": "56789"
+    "region": "eu-west-1",
+    "tag_key": "service",
+    "tag_value": "consul-server",
+    "access_key_id": "12345",
+    "secret_access_key": "56789"
+  }
 },
 ```
 
@@ -166,7 +168,7 @@ We won't cover how to create a Launch Config in AWS but we will look at the User
 
 As we create a generic AMI of our consul server, we need to do some basic customisation when our instances launch.  This includes setting the hostname, replacing the consul bind IP address in the config file and starting the consul service.  We can do this easily with AWS User Data using the following script:
 
-```shell
+```bash
 #!/bin/bash
 
 # This script replaces the hostname of the server
